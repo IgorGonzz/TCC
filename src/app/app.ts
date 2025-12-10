@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+// REMOVA RouterOutlet e RouterLink daqui. O AppModule cuida disso.
+// import { RouterOutlet, RouterLink } from '@angular/router';
+// import { FooterComponent } from './shared/footer/footer';
+// import { LgpdBannerComponent } from './shared/lgpd-banner/lgpd-banner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  // APAGUE: standalone: true, 
+  // APAGUE: imports: [RouterOutlet, RouterLink, FooterComponent, LgpdBannerComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('bjj-score-boardIgor');
+export class AppComponent {
+  title = 'bjj-scoreboard-tcc';
 }

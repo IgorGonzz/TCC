@@ -1,0 +1,67 @@
+<div *ngIf="matchState$ | async as match">
+
+<div class="scoreboard-container">
+    <h2>Placar de Luta - Jiu-Jitsu</h2>
+
+    <div *ngIf="match.winner" class="winner-display">
+      <span *ngIf="match.winner !== 'EMPATE'">O VENCEDOR É: </span>
+    <span class="winner-name">{{ match.winner }}</span>
+    </div>
+
+    <div class="timer-display">
+    <span>Tempo Restante:</span>
+    <span class="time-value">{{ formatTime(match.matchTime) }}</span>
+    </div>
+    
+    <div class="timer-controls">
+    <button (click)="startTimer()" [disabled]="match.isRunning || match.matchTime === 0">START</button>
+    <button (click)="pauseTimer()" [disabled]="!match.isRunning">PAUSE</button>
+    </div>
+    
+    <div class="scores-row">
+    <div class="athlete-panel">
+        <h3>{{ match.athleteA.name }}</h3>
+        
+        <div class="score-display">
+        <span class="points">{{ match.athleteA.points }}</span> Pontos
+        </div>
+        
+        <p class="advantages">Vantagens: {{ match.athleteA.advantages }}</p>
+        <p class="penalties">Punições: {{ match.athleteA.penalties }}</p>
+
+        <div class="actions">
+        <button (click)="updateScore('A', 'points', 2)">+2 Pts</button>
+        <button (click)="updateScore('A', 'points', 3)">+3 Pts</button>
+        <button (click)="updateScore('A', 'points', 4)">+4 Pts</button>
+        <button (click)="updateScore('A', 'advantages', 1)">+1 Vantagem</button>
+        <button (click)="updateScore('A', 'penalties', 1)">+1 Punição</button>
+        <button (click)="updateScore('A', 'penalties', -1)">-1 Punição</button>
+        </div>
+    </div>
+
+    <div class="vs-divider">VS</div>
+
+    <div class="athlete-panel">
+        <h3>{{ match.athleteB.name }}</h3>
+        
+        <div class="score-display">
+        <span class="points">{{ match.athleteB.points }}</span> Pontos
+        </div>
+        
+        <p class="advantages">Vantagens: {{ match.athleteB.advantages }}</p>
+        <p class="penalties">Punições: {{ match.athleteB.penalties }}</p>
+
+        <div class="actions">
+        <button (click)="updateScore('B', 'points', 2)">+2 Pts</button>
+        <button (click)="updateScore('B', 'points', 3)">+3 Pts</button>
+        <button (click)="updateScore('B', 'points', 4)">+4 Pts</button>
+        <button (click)="updateScore('B', 'advantages', 1)">+1 Vantagem</button>
+        <button (click)="updateScore('B', 'penalties', 1)">+1 Punição</button>
+        <button (click)="updateScore('B', 'penalties', -1)">-1 Punição</button>
+        </div>
+    </div>
+    </div>
+    
+    <button class="reset-button" (click)="resetScore()">REINICIAR LUTA (Reset Pontos e Tempo)</button>
+</div>
+</div>

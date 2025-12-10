@@ -1,8 +1,12 @@
-import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
-import { App } from './app/app';
-import { config } from './app/app.config.server';
+// ... código acima
 
-const bootstrap = (context: BootstrapContext) =>
-    bootstrapApplication(App, config, context);
+import { AppModule } from './app/app.module'; // Importa o App Module
+import { environment } from './environments/environment'; // Pode ser que precise importar environment
 
-export default bootstrap;
+if (environment.production) {
+  enableProdMode();
+}
+
+// ESTA LINHA É CRÍTICA:
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
